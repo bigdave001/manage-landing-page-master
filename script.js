@@ -19,3 +19,15 @@ if (contentbox && leftArrow && rightArrow) {
   });
 }
 // ...existing code...
+// fade-in on scroll
+const faders = document.querySelectorAll('.fade-in');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+
+faders.forEach(el => io.observe(el));
